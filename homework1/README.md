@@ -3,6 +3,6 @@
 # Результаты
 Метрика PSNR на тестовом примере -- 33.04.  
 Исходное изображение
-![Исходное изображение](https://github.com/Khaymon/cv_course_2022/blob/homework1/homework1/resources/RGB_CFA.bmp "Исходное изображение")  
+![Оригинальное изображение](https://github.com/Khaymon/cv_course_2022/blob/homework1/homework1/resources/RGB_CFA.bmp "Оригинальное изображение")  
 Результат
 ![Результат](https://github.com/Khaymon/cv_course_2022/blob/homework1/homework1/resources/RGB_CFA_result.bmp "Результат")
