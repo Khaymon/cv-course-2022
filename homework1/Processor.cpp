@@ -35,7 +35,7 @@ Pixel Processor::PreprocessPixel(BmpImage& bmp_image, Position position) {
     double max_gradient = gradients_bunch.GetMaxGradient();
     double min_gradient = gradients_bunch.GetMinGradient();
 
-    double threshold = (k1 * min_gradient) + (k2 * (max_gradient - min_gradient));
+    double threshold = (k1 * min_gradient) + (k2 * (max_gradient + min_gradient));
     // std::cout << "Threshold: " << threshold << std::endl;
 
     std::vector<Gradient> gradients_subset = gradients_bunch.FilterByThreshold(threshold);
