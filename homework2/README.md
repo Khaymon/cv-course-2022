@@ -3,13 +3,13 @@
 In this homework variations of median filtering algorithm were realised.
 ## Results
 | <img src="./resources/sample.bmp" alt="drawing" width="500"/> | <img src="./resources/window_5_result.bmp" alt="drawing" width="500"/> |
-|:-------------------------------------------------------------:| ---------------------------------------------------------------------- |
-|               <center>*Original image*</center>               | <center>*Window size 5 filtering*</center>                             |
+|:-------------------------------------------------------------:| :--------------------------------------------------------------------: |
+|                                *Original image*               |                  *Window size 5 filtering*                             |
 |                                                               |                                                                        |
 
 | <img src="./resources/window_15_result.bmp" alt="drawing" width="500"/> | <img src="./resources/window_35_result.bmp" alt="drawing" width="500"/> |
-|:-----------------------------------------------------------------------:| ----------------------------------------------------------------------- |
-|                    <center>*Window size 15 filtering*</center>                    | <center>*Window size 35 filtering*</center>                              |
+|:-----------------------------------------------------------------------:| :---------------------------------------------------------------------: |
+|                            *Window size 15 filtering*                   |         *Window size 35 filtering*                                      |
 |                                                                         |                                                                         |
 ## Complexity analysis
 Having current image position $(i,j)$ we need to find a median brightness value for each color (red, green, blue) in a window $[i - n,\ i + n]\times[j - n,\ j + n]$ where $n$ is a window size.
@@ -24,11 +24,10 @@ The idea is the same as in the Huang's algorithm but we save histograms for all 
 We need to keep track of histograms for each color in addition to current histograrm. So, it's $3\times 255\times M + 3\times 255 = 768(M+1)=O(1)$ extra space.
 ## Algorithms comparison
 Performance of the algorithms was checked and compared with OpenCV realisation on $4176\times 2073$ image with $5,\, 15,\, 35,\, 95$ window sizes.
-<center><img src="./Results.png" alt="drawing" width="700"/></center>
+<p align="center">
+  <img src="./Results.png" alt="drawing" width="700"/>
+</p>
 
 It's obvious that OpenCV uses $O(1)$ median filtering realization with operations vectorization.
 ## Optimal parameters
-As we can see, $O(n)$ realization is better for all window sizes to 95. Let's consider the equation:
-<!-- $$
-    768nMN=6M + 768MN \Leftrightarrow n=\dfrac{1}{128N}
-$$ -->
+As we can see, $O(n)$ realization is better for all window sizes to 95. With approximately 200 window size it seems like better to use $O(1)$ realization.
