@@ -20,7 +20,7 @@ We need 3 arrays to keep histograms with 256 bins. So, the space complexity is $
 Each time we move to the next column we add the rightmost values to the current window histogram and substract the rightmost column of previous window. We need $255\times 3\times n=768\times n$ operations to add and substract values in histogram for each pixel. So, the final time complexity is $768\times n\times M\times N=O(n)$.  
 As well as in the previous algorithm we need $3\times 256=768=O(1)$ extra space to keep track of current histograms.
 ### Perreault's $O(1)$ algorithm
-The idea is the same as in the Huang's algorithm but we save histograms for all $N$ columns and update them then moving to the next row. We need $2\times 3\times M\times N=6\times M\times N$ operations to update histograms and $3\times 256=768$ operations in worst case to retrieve median. The total time complexity is $6\times M + 768\times M\times N=O(1)$.  
+The idea is the same as in the Huang's algorithm but we save histograms for all $N$ columns and update them then moving to the next row. We need $2\times 3\times M\times N=6\times M\times N$ operations to update histograms and $3\times 256=768$ operations in worst case to retrieve median. The total time complexity is $6\times M \times N+ 768\times M\times N=O(1)$.  
 We need to keep track of histograms for each color in addition to current histograrm. So, it's $3\times 255\times M + 3\times 255 = 768(M+1)=O(1)$ extra space.
 ## Algorithms comparison
 Performance of the algorithms was checked and compared with OpenCV realisation on $4176\times 2073$ image with $5,\, 15,\, 35,\, 95$ window sizes.
