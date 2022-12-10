@@ -14,19 +14,25 @@ by $45$ degrees and rotate the image using one of the interpolation algorithms (
 | <img src="./examples/1.jpg" alt="drawing" width="500"/>       | <img src="./transformed/1_bilinear.jpg" alt="drawing" width="500"/>           |
 |:-------------------------------------------------------------:| :--------------------------------------------------------------------:        |
 |                                *Original image*               |                  *Bilinear approximation result*                              |
-|                                                               |                                                                               |
 
 | <img src="./examples/2.jpg" alt="drawing" width="500"/> | <img src="./transformed/2_bilinear.jpg" alt="drawing" width="500"/>                     |
 |:-----------------------------------------------------------------------:| :---------------------------------------------------------------------: |
 |                            *Original image*                             |         *Bilinear approximation result*                                 |
-|                                                                         |                                                                         |
 
 | <img src="./examples/3.jpg" alt="drawing" width="500"/>       | <img src="./transformed/3_nearest.jpg" alt="drawing" width="500"/>            |
 |:-------------------------------------------------------------:| :--------------------------------------------------------------------:        |
 |                                *Original image*               |                  *Nearest neighbour approximation result*                     |
-|                                                               |                                                                               |
 
 | <img src="./examples/4.jpg" alt="drawing" width="500"/> | <img src="./transformed/4_nearest.jpg" alt="drawing" width="500"/>                       |
 |:-----------------------------------------------------------------------:| :---------------------------------------------------------------------: |
 |                            *Original image*                             |         *Nearest neighbour approximation result*                        |
-|                                                                         |                                                                         |
+
+## Complexity
+### Time
+Time complexity is $O(nm\log{n})$ where $n = 2^p,\ m = 2^q$.  
+| <img src="./bilinear_interpolation_time.png" alt="drawing" width="500"/> | <img src="./nearest_interpolation_time.png" alt="drawing" width="500"/>                       |
+|:-----------------------------------------------------------------------:| :---------------------------------------------------------------------: |
+|                            *Bilinear interpolation*                             |         *Nearest neighbour interpolation*                        |  
+
+### Space
+We need to keep track of array with size $nm$ in `_merge` method of FHT. So, space complexity is $O(nm)$.
