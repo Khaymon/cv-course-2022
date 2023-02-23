@@ -27,6 +27,7 @@ def transform_image(image_num: int, interpolation_method: str, repeats: int = 3)
     image = cv2.imread(image_path)
     grayscale_image = grayscale(image)
     image_preprocessed = sobel_preprocess(grayscale_image)
+    cv2.imwrite("sobel_filtering.jpg", image_preprocessed)
 
     fht = FHT()
 
@@ -52,8 +53,8 @@ def make_plot(pixels: List[int], seconds: List[float]) -> None:
     sns.set_style("whitegrid")
     fig = plt.figure(figsize=(12, 8))
     plt.scatter(pixels, seconds)
-    plt.title("Time dependency from number of pixels", fontsize=18)
-    plt.xlabel("Pixels", fontsize=16)
+    plt.title("Time dependency from number of megapixels", fontsize=18)
+    plt.xlabel("Megapixels", fontsize=16)
     plt.ylabel("Time (seconds)", fontsize=16)
 
     plt.show()
@@ -62,7 +63,8 @@ def make_plot(pixels: List[int], seconds: List[float]) -> None:
 def main():
     results = []
     for i in range(1, 11):
-        pixels, seconds = transform_image(i, "nearest")
+        pixels, seconds = transform_image(i, "bilinear")
+        pixels /= 1_000_000
 
         results.append((pixels, seconds))
 

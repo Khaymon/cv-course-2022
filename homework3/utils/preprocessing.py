@@ -7,14 +7,6 @@ def get_sobel_matrix(image: np.ndarray) -> np.ndarray:
 
     return sobel
 
-def canny_preprocess(image: np.ndarray) -> np.ndarray:
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-    closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel, iterations=15)
-
-    canny = cv2.Canny(image=closing, threshold1=100, threshold2=100)
-
-    return canny
-
 
 def sobel_preprocess(image: np.ndarray, threshold_percent: int = 90) -> np.ndarray:
     sobel = get_sobel_matrix(image)
