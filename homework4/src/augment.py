@@ -98,3 +98,40 @@ def augment_final_image(image: np.ndarray) -> np.ndarray:
     result_image = add_vignette(result_image)
     
     return result_image
+
+
+def overlap_images(background_image: np.ndarray, front_image: np.ndarray) -> np.ndarray:
+    result_background = background_image.copy()
+    
+    for i in range(front_image.shape[0]):
+        for j in range(front_image.shape[1]):
+            for channel in range(3):
+                if front_image[i, j, 3] != 0:
+                    result_background[i, j, channel] = front_image[i, j, channel]
+    
+    return result_background
+
+
+def place_image(image: np.ndarray, background: np.ndarray, position: np.ndarray):
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2RGBA)
+    background = cv2.cvtColor(background, cv2.COLOR_RGB2RGBA)
+    
+    background_rows = background.shape[0]
+    background_columns = background.shape[1]
+
+    paper_rows = image.shape[0]
+    paper_columns = image.shape[1]    
+
+    paper_position = np.float32([[0, 0], 
+                                [0, paper_rows - 1], 
+                                [paper_columns - 1, paper_rows - 1], 
+                                [paper_columns - 1, 0]]
+                                )
+    transform = cv2.getPerspectiveTransform(position, paper_position)
+    inverse_transform = np.linalg.pinv(transform)
+
+    paper_image_transformed = cv2.warpPerspective(image, inverse_transform, 
+                                                (background_columns, background_rows), 
+                                                cv2.INTER_LINEAR_EXACT)
+    
+    return overlap_images(background, paper_image_transformed)
