@@ -38,7 +38,7 @@ def add_gaussian_blur(image: np.ndarray,
     return result_image
 
 
-def add_motion_blur(image: np.ndarray, k: int = 15) -> np.ndarray:
+def add_motion_blur(image: np.ndarray, k: int = 8) -> np.ndarray:
     result_image = image.copy()
     motion_blur = iaa.MotionBlur(k=k)
     
@@ -70,8 +70,20 @@ def add_vignette(image: np.ndarray,
     return result_image
 
 
-def augment_paper(image: np.ndarray) -> np.ndarray:
+def add_paper_texture(image: np.ndarray,
+                      texture: np.ndarray,
+                      alpha: float = 0.5,
+                      gamma: float = 3.0):
+    result_image = cv2.resize(texture, image.shape[:2]).transpose((1, 0, 2))
+    result_image = result_image = cv2.addWeighted(result_image, alpha, image,
+                                                  1 - alpha, 0.0, gamma)
+    
+    return result_image
+
+
+def augment_paper(image: np.ndarray, texture: np.ndarray) -> np.ndarray:
     result_image = image.copy()
+    result_image = add_paper_texture(image, texture)
     result_image = add_vertical_lines(image)
     gaussian_noise = iaa.AdditiveGaussianNoise(scale=0.2*255)
     result_image = gaussian_noise(image=result_image)
