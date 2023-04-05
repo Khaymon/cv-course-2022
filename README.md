@@ -1,4 +1,4 @@
-# Computer vision algorithms course of ABBYY, MIPT
+# CV course ABBYY, MIPT
 
 ## Homeworks
 - [First homework](https://github.com/Khaymon/cv_course_2022/tree/master/homework1) is devoted to VNG demosaicing algorithm needed to retrieve original image from
